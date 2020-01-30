@@ -13,6 +13,6 @@ func StartServer() {
 
 	PORT := "2200"
 
-	fmt.Println("server Started on localhost: " + PORT)
+	fmt.Println("server Started on port: " + PORT)
 	http.ListenAndServe(":"+PORT, r)
 }
