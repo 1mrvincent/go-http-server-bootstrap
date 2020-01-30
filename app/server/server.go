@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"app/route"
+	"github.com/MrVxCo/go-http-server/app/route"
 )
 
 //StartServer starts the go server

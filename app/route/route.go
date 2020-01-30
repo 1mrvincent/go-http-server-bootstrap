@@ -3,6 +3,8 @@ package route
 import (
 	"net/http"
 
+	"github.com/MrVxCo/go-http-server/app/controller"
+
 	"github.com/gorilla/mux"
 )
 
@@ -19,7 +21,7 @@ func routes() http.Handler {
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer((http.Dir("static")))))
 
 	//Add http routes here
-	// r.HandleFunc("/", controller.HomeHandler).Methods("GET")
+	r.HandleFunc("/", controller.Routetest).Methods("GET")
 	// r.HandleFunc("/login", controller.GetLoginHandler).Methods("GET")
 
 	return r
