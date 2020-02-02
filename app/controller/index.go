@@ -1,14 +1,13 @@
 package controller
 
 import (
-	"log"
 	"net/http"
 )
 
 //Routetest a test handler function for the / endpoint.
 //feel free to modify as needed.
 func Routetest(w http.ResponseWriter, r *http.Request) {
-	log.Println(r)
+	// log.Println(r)
 
 	w.Write([]byte("route is functioning"))
 }

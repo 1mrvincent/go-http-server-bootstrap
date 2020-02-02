@@ -5,18 +5,17 @@ import (
 	"net/http"
 
 	"github.com/MrVxCo/go-http-server/app/route"
-	"github.com/urfave/negroni"
+	"github.com/MrVxCo/go-http-server/app/middleware"
 )
 
 //StartServer starts the go server
 func StartServer() {
 	r := route.LoadRoutes()
-	middlewares := negroni.New()
-	// middlewares.Use()
-	middlewares.UseHandler(r)
+	mw := middleware.GetCustomMiddlewares().LoadMiddlewares()
+	mw.UseHandler(r)
 
 	PORT := "2200"
 
 	fmt.Println("server Started on port: " + PORT)
-	http.ListenAndServe(":"+PORT, r)
+	http.ListenAndServe(":"+PORT, mw)
 }
