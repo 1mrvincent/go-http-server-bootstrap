@@ -7,12 +7,14 @@ import (
 	"github.com/urfave/negroni"
 )
 
-type NegroniWrapper struct {
+type negroniWrapper struct {
 	CustomMiddleware []http.HandlerFunc
 }
 
-func (mw *NegroniWrapper) LoadMiddlewares() *negroni.Negroni {
-	middlewares := negroni.New() //Classic()
+//LoadMiddlewares adds the custom middlewares onto the negroni
+//middleware stack
+func (mw *negroniWrapper) LoadMiddlewares() *negroni.Negroni {
+	middlewares := negroni.New() //or negroni.Classic() to add negroni default middleware stack
 	for _, m := range mw.CustomMiddleware {
 		middlewares.UseHandler(m)
 
@@ -20,7 +22,8 @@ func (mw *NegroniWrapper) LoadMiddlewares() *negroni.Negroni {
 	return middlewares
 }
 
-func GetCustomMiddlewares() *NegroniWrapper {
+func InitCustomMiddlewares() *negroniWrapper {
+	// declare your middlewares here
 	mw1 := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		log.Println("Testing middleware one : mw1")
 	})
@@ -29,7 +32,7 @@ func GetCustomMiddlewares() *NegroniWrapper {
 		log.Println("Testing middleware two : mw2")
 	})
 
-	negroniWrapper := &NegroniWrapper{
+	negroniWrapper := &negroniWrapper{
 		CustomMiddleware: []http.HandlerFunc{mw1, mw2},
 	}
 
